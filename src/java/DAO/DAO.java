@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import model.Blog;
+import model.CourseDTO;
 import model.Slider;
 import model.User;
 
@@ -74,7 +75,7 @@ public class DAO extends DBContext {
 
     public List<Blog> getPost() {
         List<Blog> list = new ArrayList<>();
-        String query = "SELECT * \n"
+        String query = "SELECT top 4 * \n"
                 + "FROM [dbo].[Blog]\n";
         try {
             conn = new DBContext().getConnection();//mo ket noi voi sql
@@ -98,7 +99,7 @@ public class DAO extends DBContext {
 
     public List<Blog> getLastPost() {
         List<Blog> list = new ArrayList<>();
-        String query = "SELECT top 3 *\n"
+        String query = "SELECT *\n"
                 + "FROM [dbo].[Blog]\n"
                 + "ORDER BY created_date DESC;";
         try {
@@ -121,12 +122,40 @@ public class DAO extends DBContext {
         return list;
     }
 
+    public List<CourseDTO> getCourse() {
+        List<CourseDTO> list = new ArrayList<>();
+        String query = "SELECT top 4 \n"
+                + "    c.id, \n"
+                + "    c.subtitle AS title, \n"
+                + "    t.name AS tagline, \n"
+                + "    cth.thumbnail_url AS thumbnail_url\n"
+                + "FROM [dbo].[Course] c\n"
+                + "LEFT JOIN [dbo].[Course_Tagline] ct ON c.id = ct.course_id\n"
+                + "LEFT JOIN [dbo].[Tagline] t ON ct.tagline_id = t.id\n"
+                + "LEFT JOIN [dbo].[Course_Thumbnails] cth ON c.id = cth.course_id\n"
+                + "WHERE c.status = 1;";
+        try {
+            conn = new DBContext().getConnection();//mo ket noi voi sql
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new CourseDTO(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
     public static void main(String[] args) {
         DAO dao = new DAO();
         User user = dao.login("admin@fpt.edu.vn", "admin123");
         List<Slider> listS = dao.getSlider();
         List<Blog> listP = dao.getLastPost();
+        List<CourseDTO> listC = dao.getCourse();
 
-        System.out.println(listP);
+        System.out.println(listS);
     }
 }

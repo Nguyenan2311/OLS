@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
                request.getRequestDispatcher("Login.jsp").forward(request, response);
            }
            else{
-                response.sendRedirect("home.jsp");
+                response.sendRedirect("home");
            }
            
            
