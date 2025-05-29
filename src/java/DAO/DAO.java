@@ -74,7 +74,31 @@ public class DAO extends DBContext {
 
     public List<Blog> getPost() {
         List<Blog> list = new ArrayList<>();
-        String query = "SELECT TOP 3 * \n"
+        String query = "SELECT * \n"
+                + "FROM [dbo].[Blog]\n";
+        try {
+            conn = new DBContext().getConnection();//mo ket noi voi sql
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Blog(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getDate(7),
+                        rs.getDate(8),
+                        rs.getInt(9)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<Blog> getLastPost() {
+        List<Blog> list = new ArrayList<>();
+        String query = "SELECT top 3 *\n"
                 + "FROM [dbo].[Blog]\n"
                 + "ORDER BY created_date DESC;";
         try {
@@ -101,7 +125,7 @@ public class DAO extends DBContext {
         DAO dao = new DAO();
         User user = dao.login("admin@fpt.edu.vn", "admin123");
         List<Slider> listS = dao.getSlider();
-        List<Blog> listP = dao.getPost();
+        List<Blog> listP = dao.getLastPost();
 
         System.out.println(listP);
     }

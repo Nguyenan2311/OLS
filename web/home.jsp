@@ -169,12 +169,10 @@
             <div class="sidebar">
                 <div class="sidebar-item">
                     <h3>Latest Post</h3>
-                    <p>Title: Recent Blog Post 1</p>
-                    <p>Date: 2025-05-26</p>
-                    <p>Title: Recent Blog Post 2</p>
-                    <p>Date: 2025-05-25</p>
-                    <p>Title: Recent Blog Post 3</p>
-                    <p>Date: 2025-05-24</p>
+                    <c:forEach items="${listLastPost}" var="o">
+                    <p>${o.title}</p>
+                    <p>${o.created_date}</p>
+                    </c:forEach>
                 </div>
                 <div class="sidebar-item contact-links">
                     <h3>Quick Link</h3>
