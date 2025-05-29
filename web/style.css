@@ -1,0 +1,174 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : May 27, 2025, 12:03:13 PM
+    Author     : haing
+*/       
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+}
+
+/* HEADER */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 30px;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+  color: #4caf50;
+  font-family: 'Arial Black', sans-serif;
+}
+
+nav {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+}
+
+nav a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* Search + Profile */
+.search-profile {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.search-profile input {
+  padding: 8px 15px 8px 40px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  width: 200px;
+  background-color: #f1f1f1;
+  background-image: url('https://cdn-icons-png.flaticon.com/512/622/622669.png');
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  background-size: 20px 20px;
+  outline: none;
+}
+
+.search-profile input::placeholder {
+  color: transparent; /* ẩn chữ Search */
+}
+
+/* Icon hình người tròn viền đen */
+.profile-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: black;       /* nền đen */
+  color: white;                  /* chữ trắng */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Đường kẻ */
+hr {
+  border: none;
+  border-top: 2px solid #ccc;
+  margin: 0;
+}
+
+/* MAIN CONTENT */
+main {
+  text-align: center;
+  padding: 50px 20px;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 40px;
+}
+
+/* Form */
+.password-form {
+  display: inline-block;
+  text-align: left;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  width: 180px;
+  font-size: 18px;
+}
+
+.form-group input {
+  width: 280px;
+  height: 35px;
+  font-size: 16px;
+  padding: 5px 10px;
+  border: 1px solid #aaa;
+}
+
+/* Confirm button: trắng chữ trắng, viền xanh */
+.password-form button {
+  display: block;
+  margin: 30px auto;
+  background-color: #4caf50;
+  color: white;
+  border: 2px solid #4caf50;
+  padding: 10px 25px;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.password-form button:hover {
+  background-color: #45a049;
+}
+
+/* NOTE phần cảnh báo */
+.note {
+    color: #f7931e;
+    font-weight: bold;
+    margin-top: 50px;
+    text-align: center;
+    line-height: 1.6;
+}
+
+.note-title {
+    text-decoration: underline;
+}
+
+.note span {
+  text-decoration: underline;
+}
+.message.success {
+  color: green;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.message.error {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+}
