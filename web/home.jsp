@@ -8,104 +8,123 @@
         <title>Edemy - Home</title>
         <style>
             body {
-                font-family: Arial, sans-serif;
                 margin: 0;
-                padding: 0;
+                font-family: Arial, sans-serif;
             }
-            .header {
-                background-color: #f8f9fa;
-                padding: 10px 20px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
-            .header .logo {
-                color: #28a745;
-                font-size: 24px;
-                font-weight: bold;
-            }
-            .header nav a {
-                margin: 0 15px;
-                text-decoration: none;
-                color: #000;
-            }
-            .header .search-bar {
-                padding: 5px;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-            }
-            .header .sign-up {
-                background-color: #28a745;
-                color: white;
-                padding: 5px 15px;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-            }
+
+            /* Banner (Slider) */
             .banner {
+                width: 100%;
+                height: 200px;
                 position: relative;
-                text-align: center;
-                padding: 20px;
-                background-color: #f1f1f1;
+                overflow: hidden;
             }
+
             .banner img {
                 width: 100%;
-                max-height: 300px;
+                height: 100%;
+                object-fit: cover;
             }
-            .banner-text {
+
+            .banner-text a {
                 position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                color: #000;
-                font-size: 24px;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                display: block;
+                text-indent: -9999px;
             }
+
+            /* Layout */
             .content {
                 display: flex;
                 padding: 20px;
+                gap: 20px;
             }
+
             .main-content {
                 flex: 3;
-                padding-right: 20px;
             }
+
             .sidebar {
                 flex: 1;
             }
-            .slider, .hot-posts, .featured-subjects {
-                margin-bottom: 20px;
+
+            .hot-posts,
+            .featured-subjects {
+                margin-bottom: 40px;
             }
-            .item {
-                border: 1px solid #ccc;
-                padding: 10px;
-                text-align: center;
-                margin: 10px 10px 10px 0; /* Thêm kho?ng cách ngang gi?a các m?c */
-            }
-            .item img {
-                max-width: 100%;
-                height: auto;
-            }
-            .item a {
-                text-decoration: none;
-                color: #000;
-            }
-            .hot-posts .items, .featured-subjects .items {
-                display: flex;
-                flex-direction: row;
-                flex-wrap: wrap; /* Cho phép xu?ng dòng n?u không ?? ch? */
-                justify-content: flex-start;
-            }
-            .sidebar-item {
-                border: 1px solid #ccc;
-                padding: 10px;
+
+            .hot-posts h3,
+            .featured-subjects h3 {
                 margin-bottom: 10px;
             }
-            .contact-links a {
-                display: block;
-                margin: 5px 0;
-                text-decoration: none;
-                color: #000;
+
+            .items {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 16px;
             }
+
+            .card {
+                width: 200px;
+                border: 1px solid #ccc;
+                padding: 10px;
+                border-radius: 8px;
+                text-align: center;
+                background-color: #f9f9f9;
+                transition: transform 0.2s ease;
+            }
+
+            .card:hover {
+                transform: scale(1.03);
+            }
+
+            .card img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 4px;
+            }
+
+            /* Sidebar */
+            .sidebar-item {
+                background-color: #f1f1f1;
+                padding: 15px;
+                border-radius: 8px;
+                margin-bottom: 20px;
+            }
+
+            .sidebar-item h3 {
+                margin-top: 0;
+            }
+
+            .sidebar-item.contact-links a {
+                display: block;
+                margin-top: 5px;
+                text-decoration: none;
+                color: #333;
+            }
+
+            .sidebar-item.contact-links a:hover {
+                text-decoration: underline;
+            }
+            a {
+                color: inherit;      /* Gi? nguyên màu ch? c?a ph?n t? cha (th??ng là màu ?en) */
+                text-decoration: none; /* B? g?ch chân */
+                font-weight: bold;
+            }
+            .quick-link-item {
+                display: flex;
+                align-items: center;
+                gap: 8px; /* kho?ng cách gi?a icon và ch? */
+                margin-top: 5px;
+            }
+
+
+
         </style>
+        <script src="https://kit.fontawesome.com/8807c30b90.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <%@include file = "header.jsp" %>
@@ -120,67 +139,72 @@
         </c:if>
 
         <div class="content">
+            <!-- Left side: hot post and subjects side by side -->
             <div class="main-content">
-
-
-                <div class="hot-posts">
-                    <h3>Hot post</h3>
-                    <c:forEach items="${listPost}" var="o">
+                <div class="horizontal-section">
+                    <div class="hot-posts">
+                        <h3>Hot post</h3>
                         <div class="items">
-                            <div class="item">
-                                <a href="https://example.com/post1">
-                                    <img src="${o.thumbnail_url}" alt="">
-                                    <p>${o.title}</p>
-                                    <p>${o.created_date}</p>
-                                </a>
-                            </div>
-                        </c:forEach>
-                    </div>
-                </div>
+                            <c:forEach items="${listPost}" var="o">
+                                <div class="card">
+                                    <a href="https://example.com/post1">
+                                        <img src="${o.thumbnail_url}" alt="" width="200px" height="200px">
+                                        <p>${o.title}</p>
 
-                <div class="featured-subjects">
-                    <h3>Subjects</h3>
-                    <div class="items">
-                        <div class="item">
-                            <a href="https://example.com/subject1">
-                                <img src="https://via.placeholder.com/100x100" alt="Subject 1">
-                                <p>Title</p>
-                                <p>Detail: Learn English</p>
-                            </a>
+                                    </a>
+                                    <p>${o.created_date}</p>
+                                </div>
+                            </c:forEach>
                         </div>
-                        <div class="item">
-                            <a href="https://example.com/subject2">
-                                <img src="https://via.placeholder.com/100x100" alt="Subject 2">
-                                <p>Title</p>
-                                <p>Detail: Learn Python</p>
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="https://example.com/subject3">
-                                <img src="https://via.placeholder.com/100x100" alt="Subject 3">
-                                <p>Title</p>
-                                <p>Detail: Learn Java</p>
-                            </a>
+                    </div>
+
+                    <div class="featured-subjects">
+                        <h3>Subjects</h3>
+                        <div class="items">
+                            <c:forEach items="${listCourse}" var="o">
+                                <div class="card">
+                                    <a href="https://example.com/subject1">
+                                        <img src="${o.thumbnailUrl}" alt="">
+                                        <p>${o.title}</p>
+
+                                    </a>
+                                    <p>${o.tagline}</p>
+                                </div>
+                            </c:forEach>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- Right side: sidebar -->
             <div class="sidebar">
                 <div class="sidebar-item">
                     <h3>Latest Post</h3>
-                    <c:forEach items="${listLastPost}" var="o">
-                    <p>${o.title}</p>
-                    <p>${o.created_date}</p>
+                    <c:forEach items="${listLastPost}" var="o">                             
+                        <p>
+                            <a href="#">${o.title}</a>
+                        </p>
+                        <p>
+                            ${o.created_date}
+                        </p>
                     </c:forEach>
                 </div>
                 <div class="sidebar-item contact-links">
                     <h3>Quick Link</h3>
-                    <a href="mailto:abcxyz@gmail.com">? abcxyz@gmail.com</a>
-                    <a href="tel:0123456789">? 0123456789</a>
-                    <a href="#">? About us</a>
+                    <div class="quick-link-item">
+                        <i class="fa-solid fa-envelope"></i><a href="mailto:abcxyz@gmail.com">abcxyz@gmail.com</a>
+                    </div>
+                    <div class="quick-link-item">
+                        <i class="fa-solid fa-phone"></i><a href="tel:0123456789">0123456789</a>
+                    </div>
+                    <div class="quick-link-item">
+                        <i class="fa-solid fa-users"></i><a href="#">About us</a>
+                    </div>
+
                 </div>
             </div>
         </div>
+        <%@include file="footer.jsp" %>
     </body>
+
 </html>
