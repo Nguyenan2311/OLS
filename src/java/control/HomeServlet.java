@@ -38,8 +38,10 @@ public class HomeServlet extends HttpServlet {
            DAO dao = new DAO();
            List <Slider> listSlider = dao.getSlider();
            List <Blog> listPost = dao.getPost();
+           List <Blog> listLastPost = dao.getLastPost();
            request.setAttribute("listSlider", listSlider);
            request.setAttribute("listPost", listPost);
+           request.setAttribute("listLastPost", listLastPost);
            request.getRequestDispatcher("home.jsp").forward(request, response);
            
         }
