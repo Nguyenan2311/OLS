@@ -6,7 +6,7 @@
             <img src="img/logo.png" alt="alt" height="40" width="120"/>
         </div>
         <nav>
-            <a href="#">Home</a>
+            <a href="home">Home</a>
             <a href="#">Course</a>
             <a href="#">Blog</a>
             <a href="#">About</a>

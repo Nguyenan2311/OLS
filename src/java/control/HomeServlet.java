@@ -38,15 +38,16 @@ public class HomeServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             DAO dao = new DAO();
-            List<Slider> listSlider = dao.getSlider();
-            List<Blog> listPost = dao.getPost();
-            List<Blog> listLastPost = dao.getLastPost();
-            List<CourseDTO> listCourse = dao.getCourse();
+            List<Slider> listSlider = dao.getSlider();// lay slider tu dao
+            List<Blog> listPost = dao.getPost();// lay danh sach post tu dao
+            List<Blog> listLastPost = dao.getLastPost();// lay danh sach post moi nhat
+            List<CourseDTO> listCourse = dao.getCourse(); // lay danh sach khoa hoc
             
             request.setAttribute("listSlider", listSlider);
             request.setAttribute("listPost", listPost);
             request.setAttribute("listLastPost", listLastPost);
             request.setAttribute("listCourse", listCourse);
+            
             request.getRequestDispatcher("home.jsp").forward(request, response);
 
         }
@@ -90,16 +91,6 @@ public class HomeServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    public static void main(String[] args) {
-         DAO dao = new DAO();
-        List<Slider> listSlider = dao.getSlider();
-            List<Blog> listPost = dao.getPost();
-            List<Blog> listLastPost = dao.getLastPost();
-            List<CourseDTO> listCourse = dao.getCourse();
-        System.out.println("=== DEBUG INFO ===");
-            System.out.println("Slider size: " + (listSlider != null ? listSlider.size() : "null"));
-            System.out.println("Post size: " + (listPost != null ? listPost.size() : "null"));
-            System.out.println(listCourse);
-    }
+    
 
 }
