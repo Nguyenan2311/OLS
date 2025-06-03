@@ -48,7 +48,7 @@ public class HomeServlet extends HttpServlet {
             request.setAttribute("listLastPost", listLastPost);
             request.setAttribute("listCourse", listCourse);
             
-            request.getRequestDispatcher("home.jsp").forward(request, response);
+            request.getRequestDispatcher("view/home.jsp").forward(request, response);
 
         }
     }
