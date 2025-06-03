@@ -39,8 +39,8 @@ public class DAO extends DBContext {
                         rs.getString(2),
                         rs.getString(3),
                         rs.getByte(4),
-                        rs.getString(5),
-                        rs.getString(6),
+                        rs.getDate(5),
+                        rs.getDate(6),
                         rs.getString(7),
                         rs.getString(8),
                         rs.getString(9),
@@ -75,7 +75,7 @@ public class DAO extends DBContext {
 
     public List<Blog> getPost() {
         List<Blog> list = new ArrayList<>();
-        String query = "SELECT top 4 * \n"
+        String query = "SELECT  * \n"
                 + "FROM [dbo].[Blog]\n";
         try {
             conn = new DBContext().getConnection();//mo ket noi voi sql
@@ -124,7 +124,7 @@ public class DAO extends DBContext {
 
     public List<CourseDTO> getCourse() {
         List<CourseDTO> list = new ArrayList<>();
-        String query = "SELECT top 4 \n"
+        String query = "SELECT \n"
                 + "    c.id, \n"
                 + "    c.subtitle AS title, \n"
                 + "    t.name AS tagline, \n"

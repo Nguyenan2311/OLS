@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.Date;
+
 /**
  *
  * @author An_PC
@@ -13,8 +15,8 @@ public class User {
     private String email;
     private String password;
     private int role_id;
-    private String dob;
-    private String created_date;
+    private Date dob;
+    private Date created_date;
     private String first_name;
     private String last_name;
     private String gender;
@@ -26,7 +28,7 @@ public class User {
     public User() {
     }
 
-    public User(int id, String email, String password, int role_id, String dob, String created_date, String first_name, String last_name, String gender, String phone, String image, String address, int status) {
+    public User(int id, String email, String password, int role_id, Date dob, Date created_date, String first_name, String last_name, String gender, String phone, String image, String address, int status) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -74,19 +76,19 @@ public class User {
         this.role_id = role_id;
     }
 
-    public String getDob() {
+    public Date getDob() {
         return dob;
     }
 
-    public void setDob(String dob) {
+    public void setDob(Date dob) {
         this.dob = dob;
     }
 
-    public String getCreated_date() {
+    public Date getCreated_date() {
         return created_date;
     }
 
-    public void setCreated_date(String created_date) {
+    public void setCreated_date(Date created_date) {
         this.created_date = created_date;
     }
 

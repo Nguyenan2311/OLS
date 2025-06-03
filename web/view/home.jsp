@@ -9,7 +9,9 @@
         <style>
             body {
                 margin: 0;
+                padding: 0;
                 font-family: Arial, sans-serif;
+                overflow-x: hidden;
             }
 
             /* Banner (Slider) */
@@ -41,14 +43,18 @@
                 display: flex;
                 padding: 20px;
                 gap: 20px;
+                max-width: 100%;
+                margin: 0 auto;
             }
 
             .main-content {
                 flex: 3;
+                min-width: 0;
             }
 
             .sidebar {
                 flex: 1;
+                min-width: 250px;
             }
 
             .hot-posts,
@@ -61,12 +67,7 @@
                 margin-bottom: 10px;
             }
 
-            .items {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 16px;
-            }
-
+            /* Cards */
             .card {
                 width: 200px;
                 border: 1px solid #ccc;
@@ -75,6 +76,7 @@
                 text-align: center;
                 background-color: #f9f9f9;
                 transition: transform 0.2s ease;
+                flex-shrink: 0;
             }
 
             .card:hover {
@@ -90,9 +92,10 @@
             /* Sidebar */
             .sidebar-item {
                 background-color: #f1f1f1;
-                padding: 15px;
+                padding: 30px;
                 border-radius: 8px;
                 margin-bottom: 20px;
+                word-wrap: break-word;
             }
 
             .sidebar-item h3 {
@@ -109,64 +112,140 @@
             .sidebar-item.contact-links a:hover {
                 text-decoration: underline;
             }
+
             a {
-                color: inherit;      /* Gi? nguyên màu ch? c?a ph?n t? cha (th??ng là màu ?en) */
-                text-decoration: none; /* B? g?ch chân */
+                color: inherit;
+                text-decoration: none;
                 font-weight: bold;
             }
+
             .quick-link-item {
                 display: flex;
                 align-items: center;
-                gap: 8px; /* kho?ng cách gi?a icon và ch? */
+                gap: 8px;
                 margin-top: 5px;
             }
 
+            /* Sliders */
+            .slider-wrapper {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                gap: 16px;
+                width: 100%;
+            }
 
+            .slider-wrapper .banner-container {
+                flex: 0 0 100%;
+                scroll-snap-align: start;
+            }
 
+            /* Scrollable sections */
+            .scroll-container {
+                width: 100%;
+                overflow-x: auto;
+                padding-bottom: 10px;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .scroll-content {
+                display: flex;
+                gap: 16px;
+                padding: 0 10px;
+            }
+
+            /* Responsive adjustments */
+            @media (max-width: 768px) {
+                .content {
+                    flex-direction: column;
+                    padding: 10px;
+                }
+
+                .sidebar {
+                    width: 100%;
+                    min-width: auto;
+                }
+
+                .card {
+                    width: 180px;
+                }
+            }
+            /* Latest Posts styling */
+            .latest-posts {
+                padding: 15px;
+            }
+
+            .post-item {
+                margin-bottom: 20px; /* Kho?ng cách gi?a các post */
+                padding-bottom: 15px;
+                border-bottom: 1px solid #e0e0e0; /* ???ng g?ch ngang nh? phân cách */
+            }
+
+            .post-item:last-child {
+                margin-bottom: 0;
+                padding-bottom: 0;
+                border-bottom: none;
+            }
+
+            .post-title {
+                margin-bottom: 5px;
+                line-height: 1.4;
+            }
+
+            .post-date {
+                color: #666;
+                font-size: 0.9em;
+                margin-top: 0;
+            }
         </style>
         <script src="https://kit.fontawesome.com/8807c30b90.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <%@include file = "header.jsp" %>
-        <c:if test="${not empty listSlider}">
-            <c:set var="slider" value="${listSlider[0]}" />
-            <div class="banner">
-                <img src="${slider.image_url}" alt="${slider.back_link_url}">
-                <div class="banner-text">
-                    <a href="${slider.back_link_url}"></a>
+
+        <div class="slider-wrapper">
+            <c:forEach items="${listSlider}" var="slider">
+                <div class="banner-container">
+                    <div class="banner">
+                        <img src="${slider.image_url}" alt="${slider.back_link_url}">
+                        <div class="banner-text">
+                            <a href="${slider.back_link_url}"></a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </c:if>
+            </c:forEach>
+        </div>
 
         <div class="content">
-            <!-- Left side: hot post and subjects side by side -->
+            <!-- Main content -->
             <div class="main-content">
-                <div class="horizontal-section">
-                    <div class="hot-posts">
-                        <h3>Hot post</h3>
-                        <div class="items">
+                <div class="hot-posts">
+                    <h3>Hot post</h3>
+                    <div class="scroll-container">
+                        <div class="scroll-content">
                             <c:forEach items="${listPost}" var="o">
                                 <div class="card">
                                     <a href="https://example.com/post1">
                                         <img src="${o.thumbnail_url}" alt="" width="200px" height="200px">
                                         <p>${o.title}</p>
-
                                     </a>
                                     <p>${o.created_date}</p>
                                 </div>
                             </c:forEach>
                         </div>
                     </div>
+                </div>
 
-                    <div class="featured-subjects">
-                        <h3>Subjects</h3>
-                        <div class="items">
+                <div class="featured-subjects">
+                    <h3>Subjects</h3>
+                    <div class="scroll-container">
+                        <div class="scroll-content">
                             <c:forEach items="${listCourse}" var="o">
                                 <div class="card">
                                     <a href="https://example.com/subject1">
                                         <img src="${o.thumbnailUrl}" alt="">
                                         <p>${o.title}</p>
-
                                     </a>
                                     <p>${o.tagline}</p>
                                 </div>
@@ -176,17 +255,19 @@
                 </div>
             </div>
 
-            <!-- Right side: sidebar -->
+            <!-- Sidebar -->
             <div class="sidebar">
-                <div class="sidebar-item">
-                    <h3>Latest Post</h3>
+                <div class="sidebar-item latest-posts"> <!-- Thêm class latest-posts -->
+                    <h3 style="padding-bottom: 20px">Latest Post</h3>
                     <c:forEach items="${listLastPost}" var="o">                             
-                        <p>
-                            <a href="#">${o.title}</a>
-                        </p>
-                        <p>
-                            ${o.created_date}
-                        </p>
+                        <div class="post-item"> <!-- B?c m?i post trong m?t div riêng -->
+                            <p class="post-title">
+                                <a href="#">${o.title}</a>
+                            </p>
+                            <p class="post-date">
+                                ${o.created_date}
+                            </p>
+                        </div>
                     </c:forEach>
                 </div>
                 <div class="sidebar-item contact-links">
@@ -200,11 +281,10 @@
                     <div class="quick-link-item">
                         <i class="fa-solid fa-users"></i><a href="#">About us</a>
                     </div>
-
                 </div>
             </div>
         </div>
+
         <%@include file="footer.jsp" %>
     </body>
-
 </html>

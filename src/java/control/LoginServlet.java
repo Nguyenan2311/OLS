@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
            User user = dao.login(email, password);
            if(user == null){
                request.setAttribute("errorMessage", "Invalid user name or password! Please try again");
-               request.getRequestDispatcher("Login.jsp").forward(request, response);
+               request.getRequestDispatcher("view/Login.jsp").forward(request, response);
            }
            else{
                 response.sendRedirect("home");
